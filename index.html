@@ -145,75 +145,34 @@ nav a {
 </div>
   </div>
   <script type="text/javascript">
-    var num1 = 0;
-    var num2 = 0;
-    var operator = "";
-    var result = document.getElementById("result");
-    var history = [];
+	function clearScreen() {
+  document.getElementById("result").value = "";
+}
 
-    function numberClick(num) {
-        if (result.value == "0") {
-            result.value = num;
-        } else {
-            result.value += num;
-        }
-    }
+function display(value) {
+  document.getElementById("result").value += value;
+}
 
-    function operatorClick(op) {
-        num1 = parseFloat(result.value);
-        operator = op;
-        result.value = "0";
-    }
+function calculate() {
+  var p = document.getElementById("result").value;
+  var q = eval(p);
+  document.getElementById("result").value = q;
+}
+function numberClick(num) {
+  display(num);
+}
 
-    function equalClick() {
-        num2 = parseFloat(result.value);
-        var answer = 0;
-        switch (operator) {
-            case "+":
-                answer = num1 + num2;
-                break;
-            case "-":
-                answer = num1 - num2;
-                break;
-            case "*":
-                answer = num1 * num2;
-                break;
-            case "/":
-                answer = num1 / num2;
-                break;
-        }
-        result.value = answer;
-        history.push(num1 + " " + operator + " " + num2 + " = " + answer);
-        document.getElementById("history").innerHTML = history.join("<br>");
-    }
-    function clearClick() {
-        num1 = 0;
-        num2 = 0;
-        operator = "";
-        result.value = "0";
-        history = [];
-        document.getElementById("history").innerHTML = "";
-    }
-    document.addEventListener("keydown", keyboardInput);
-    function keyboardInput(event) {
-        event.preventDefault();
-        var key = event.key;
-        if (key >= '0' && key <= '9') {
-            numberClick(parseInt(key));
-        } else if (key === '+') {
-            operatorClick('+');
-        } else if (key === '-') {
-            operatorClick('-');
-        } else if (key === '*') {
-            operatorClick('*');
-        } else if (key === '/') {
-            operatorClick('/');
-        } else if (key === 'Enter' || key === '=') {
-            equalClick();
-        } else if (key === 'c' || key === 'C') {
-            clearClick();
-        }
-    }
+function operatorClick(operator) {
+  display(operator);
+}
+
+function clearClick() {
+  clearScreen();
+}
+
+function equalClick() {
+  calculate();
+}
 
 </script>
 </body>
