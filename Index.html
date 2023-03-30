@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JavaScript Calculator</title>
+	<style type="text/css">
+		body {
+			font-family: Arial;
+      background-color: #FEFF86;
+		}
+		input[type="button"] {
+			width: 50px;
+			height: 50px;
+			font-size: 20px;
+			margin: 5px;
+			background-color: #eee;
+			border: none;
+			cursor: pointer;
+      transition: background-color 0.3s ease;
+}
+
+input[type="button"]:hover {
+background-color: #ddd;
+}
+
+input[type="button"]:active {
+/* pressed effect */
+box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+		input[type="text"] {
+			width: 206px;
+			height: 50px;
+			font-size: 20px;
+			margin: 5px;
+			text-align: right;
+			padding-right: 5px;
+			border: none;
+		}
+    #calculator {
+  width: 280px;
+  height: auto;
+  margin: 0 auto;
+  padding: 10px;
+  border: 2px solid #000;
+  box-sizing: border-box;
+  background-color: #B0DAFF;
+}
+@media screen and (max-width: 768px) {
+  #calculator {
+    width: 90%;
+    font-size: 16px;
+  }
+  input[type="button"] {
+    width: 30%;
+    height: 50px;
+    font-size: 16px;
+    margin: 5px;
+  }
+  input[type="text"] {
+    width: 100%;
+    height: 50px;
+    font-size: 24px;
+    margin: 5px;
+    text-align: right;
+    padding-right: 5px;
+  }
+}
+
+#outer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+}
+nav {
+  height: 50px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+li {
+  float: left;
+}
+
+a {
+  display: block;
+  color: green;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+nav a:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+@media screen and (max-width: 600px) {
+  nav {
+    height: auto;
+  }
+
+  ul {
+    display: none;
+  }
+
+  li {
+    display: block;
+    float: none;
+  }
+
+  a {
+    padding: 10px;
+    border-bottom: 1px solid white;
+  }
+
+  ul li:last-child a {
+    border-bottom: none;
+  }
+
+  .toggle-nav {
+    font-size: 40px;
+    text-decoration: none;
+    color: white;
+    float: right;
+    padding-top: 10px;
+    margin-right: 20px;
+  }
+
+  .toggle-nav:hover {
+    color: red;
+  }
+
+  #menu:checked ~ ul {
+    display: block;
+  }
+}
+
+
+	</style>
+</head>
+<body>
+  <nav>
+  <ul>
+    <li><a href="cal.html">Home</a></li>
+    <li><a href="https://aryak-mohanty.github.io/Projects/">List</a></li>
+  </ul>
+</nav>
+
+  <div id="outer">
+
+
+<div id="calculator">
+
+
+	<div>
+		<input type="text" id="result" value="0" disabled>
+	</div>
+	<div>
+		<input type="button" value="1" onclick="numberClick(1)">
+		<input type="button" value="2" onclick="numberClick(2)">
+		<input type="button" value="3" onclick="numberClick(3)">
+		<input type="button" value="+" onclick="operatorClick('+')">
+	</div>
+	<div>
+		<input type="button" value="4" onclick="numberClick(4)">
+		<input type="button" value="5" onclick="numberClick(5)">
+		<input type="button" value="6" onclick="numberClick(6)">
+		<input type="button" value="-" onclick="operatorClick('-')">
+	</div>
+	<div>
+		<input type="button" value="7" onclick="numberClick(7)">
+		<input type="button" value="8" onclick="numberClick(8)">
+		<input type="button" value="9" onclick="numberClick(9)">
+		<input type="button" value="*" onclick="operatorClick('*')">
+	</div>
+	<div>
+		<input type="button" value="0" onclick="numberClick(0)">
+		<input type="button" value="C" onclick="clearClick()">
+		<input type="button" value="=" onclick="equalClick()">
+		<input type="button" value="/" onclick="operatorClick('/')">
+	</div>
+
+</div>
+  </div>
+  <script type="text/javascript">
+    var num1 = 0;
+    var num2 = 0;
+    var operator = "";
+    var result = document.getElementById("result");
+    var history = [];
+
+    function numberClick(num) {
+        if (result.value == "0") {
+            result.value = num;
+        } else {
+            result.value += num;
+        }
+    }
+
+    function operatorClick(op) {
+        num1 = parseFloat(result.value);
+        operator = op;
+        result.value = "0";
+    }
+
+    function equalClick() {
+        num2 = parseFloat(result.value);
+        var answer = 0;
+        switch (operator) {
+            case "+":
+                answer = num1 + num2;
+                break;
+            case "-":
+                answer = num1 - num2;
+                break;
+            case "*":
+                answer = num1 * num2;
+                break;
+            case "/":
+                answer = num1 / num2;
+                break;
+        }
+        result.value = answer;
+        history.push(num1 + " " + operator + " " + num2 + " = " + answer);
+        document.getElementById("history").innerHTML = history.join("<br>");
+    }
+    function clearClick() {
+        num1 = 0;
+        num2 = 0;
+        operator = "";
+        result.value = "0";
+        history = [];
+        document.getElementById("history").innerHTML = "";
+    }
+    document.addEventListener("keydown", keyboardInput);
+    function keyboardInput(event) {
+        event.preventDefault();
+        var key = event.key;
+        if (key >= '0' && key <= '9') {
+            numberClick(parseInt(key));
+        } else if (key === '+') {
+            operatorClick('+');
+        } else if (key === '-') {
+            operatorClick('-');
+        } else if (key === '*') {
+            operatorClick('*');
+        } else if (key === '/') {
+            operatorClick('/');
+        } else if (key === 'Enter' || key === '=') {
+            equalClick();
+        } else if (key === 'c' || key === 'C') {
+            clearClick();
+        }
+    }
+</script>
+</body>
+</html>
