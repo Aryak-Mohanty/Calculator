@@ -90,53 +90,14 @@ a {
   padding: 14px 16px;
   text-decoration: none;
 }
-
 nav a:hover {
   background-color: #000;
   color: #fff;
+	transform: scale(1.2);
 }
-
-@media screen and (max-width: 600px) {
-  nav {
-    height: auto;
-  }
-
-  ul {
-    display: none;
-  }
-
-  li {
-    display: block;
-    float: none;
-  }
-
-  a {
-    padding: 10px;
-    border-bottom: 1px solid white;
-  }
-
-  ul li:last-child a {
-    border-bottom: none;
-  }
-
-  .toggle-nav {
-    font-size: 40px;
-    text-decoration: none;
-    color: white;
-    float: right;
-    padding-top: 10px;
-    margin-right: 20px;
-  }
-
-  .toggle-nav:hover {
-    color: red;
-  }
-
-  #menu:checked ~ ul {
-    display: block;
-  }
+nav a {
+  transition: transform 0.3s ease;
 }
-
 	</style>
 </head>
 <body>
