@@ -3,40 +3,43 @@
 <head>
 	<title>JavaScript Calculator</title>
 	<style type="text/css">
-		body {
-			font-family: Arial;
-      background-color: #FEFF86;
-		}
-		input[type="button"] {
-			width: 50px;
-			height: 50px;
-			font-size: 20px;
-			margin: 5px;
-			background-color: #eee;
-			border: none;
-			cursor: pointer;
-      transition: background-color 0.3s ease;
+	body {
+  font-family: Arial;
+  background-color: #FEFF86;
+}
+
+input[type="button"] {
+  width: 25%;
+  height: 50px;
+  font-size: 20px;
+  margin: 5px;
+  background-color: #eee;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 input[type="button"]:hover {
-background-color: #ddd;
+  background-color: #ddd;
 }
 
 input[type="button"]:active {
-/* pressed effect */
-box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+  /* pressed effect */
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
-		input[type="text"] {
-			width: 206px;
-			height: 50px;
-			font-size: 20px;
-			margin: 5px;
-			text-align: right;
-			padding-right: 5px;
-			border: none;
-		}
-    #calculator {
-  width: 280px;
+
+input[type="text"] {
+  width: 100%;
+  height: 50px;
+  font-size: 20px;
+  margin: 5px;
+  text-align: right;
+  padding-right: 5px;
+  border: none;
+}
+
+#calculator {
+  width: 100%;
   height: auto;
   margin: 0 auto;
   padding: 10px;
@@ -44,34 +47,27 @@ box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
   background-color: #B0DAFF;
 }
-@media screen and (max-width: 768px) {
+
+@media screen and (min-width: 768px) {
   #calculator {
-    width: 90%;
-    font-size: 16px;
+    width: 280px;
   }
   input[type="button"] {
-    width: 30%;
-    height: 50px;
-    font-size: 16px;
-    margin: 5px;
+    width: 50px;
   }
   input[type="text"] {
-    width: 100%;
-    height: 50px;
-    font-size: 24px;
-    margin: 5px;
-    text-align: right;
-    padding-right: 5px;
+    width: 206px;
+    font-size: 20px;
   }
 }
 
-#outer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-
+#outer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
+
 nav {
   height: 50px;
 }
@@ -94,6 +90,7 @@ a {
   padding: 14px 16px;
   text-decoration: none;
 }
+
 nav a:hover {
   background-color: #000;
   color: #fff;
@@ -139,7 +136,6 @@ nav a:hover {
     display: block;
   }
 }
-
 
 	</style>
 </head>
@@ -257,6 +253,7 @@ nav a:hover {
             clearClick();
         }
     }
+
 </script>
 </body>
 </html>
