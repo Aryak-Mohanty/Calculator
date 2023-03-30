@@ -7,7 +7,6 @@
   font-family: Arial;
   background-color: #FEFF86;
 }
-
 input[type="button"] {
   width: 25%;
   height: 50px;
@@ -18,16 +17,13 @@ input[type="button"] {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-
 input[type="button"]:hover {
   background-color: #ddd;
 }
-
 input[type="button"]:active {
   /* pressed effect */
   box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
-
 input[type="text"] {
   width: 100%;
   height: 50px;
@@ -37,7 +33,6 @@ input[type="text"] {
   padding-right: 5px;
   border: none;
 }
-
 #calculator {
   width: 100%;
   height: auto;
@@ -47,7 +42,6 @@ input[type="text"] {
   box-sizing: border-box;
   background-color: #B0DAFF;
 }
-
 @media screen and (min-width: 768px) {
   #calculator {
     width: 280px;
@@ -60,18 +54,15 @@ input[type="text"] {
     font-size: 20px;
   }
 }
-
 #outer {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
-
 nav {
   height: 50px;
 }
-
 ul {
   list-style-type: none;
   margin: 0;
@@ -82,7 +73,6 @@ ul {
 li {
   float: left;
 }
-
 a {
   display: block;
   color: green;
@@ -107,15 +97,10 @@ nav a {
     <li><a href="https://aryak-mohanty.github.io/Projects/">List</a></li>
   </ul>
 </nav>
-
-  <div id="outer">
-
-
+<div id="outer">
 <div id="calculator">
-
-
 	<div>
-		<input type="text" id="result" value="0" disabled>
+		<input type="text" id="result" value="" disabled>
 	</div>
 	<div>
 		<input type="button" value="1" onclick="numberClick(1)">
@@ -173,7 +158,25 @@ function clearClick() {
 function equalClick() {
   calculate();
 }
+function backspace() {
+  var currentValue = document.getElementById("result").value;
+  document.getElementById("result").value = currentValue.slice(0, -1);
+}
 
+document.addEventListener("keydown", function(event) {
+  if (event.key >= 0 && event.key <= 9) {
+    numberClick(event.key);
+  } else if (event.key === "+" || event.key === "-" || event.key === "*" || event.key === "/") {
+    operatorClick(event.key);
+  } else if (event.key === "Enter") {
+    equalClick();
+  } else if (event.key === "Escape") {
+    clearClick();
+  }
+  else if(event.code === "Backspace") {
+    backspace();
+  }
+});
 </script>
 </body>
 </html>
