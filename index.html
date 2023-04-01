@@ -4,216 +4,359 @@
 	<title>JavaScript Calculator</title>
 	<style type="text/css">
 	body {
-  font-family: Arial;
-  background-color: #FEFF86;
-}
-input[type="button"] {
-  width: 25%;
-  height: 50px;
-  font-size: 20px;
-  margin: 5px;
-  background-color: #eee;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-input[type="button"]:hover {
-  background-color: #ddd;
-}
-input[type="button"]:active {
-  /* pressed effect */
-  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
-}
-input[type="text"] {
-  width: 100%;
-  height: 50px;
-  font-size: 20px;
-  margin: 5px;
-  text-align: right;
-  padding-right: 5px;
-  border: none;
-}
-#calculator {
-  width: 100%;
-  height: auto;
-  margin: 0 auto;
-  padding: 10px;
-  border: 2px solid #000;
-  box-sizing: border-box;
-  background-color: #B0DAFF;
-}
-#outer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-@media screen and (min-width: 768px) {
-  #calculator {
-    width: 280px;
-  }
-  input[type="button"] {
-    width: 50px;
-  }
-  input[type="text"] {
-    width: 206px;
-    font-size: 20px;
-  }
-}
-nav {
-  height: 50px;
-}
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
-li {
-  float: left;
-}
-a {
-  display: block;
-  color: green;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-nav a:hover {
-  background-color: #000;
-  color: #fff;
-	transform: scale(1.2);
-}
-nav a {
-  transition: transform 0.3s ease;
-}
-
-	#buttondark{
-	float: right;
-	margin-top: 10px;
+	  font-family: Arial;
+	  background-color: #FEFF86;
+	}
+	input[type="button"] {
+	  width: 25%;
+	  height: 50px;
+	  font-size: 20px;
+	  margin: 5px;
+	  background-color: #eee;
+	  border: none;
+	  cursor: pointer;
+	  transition: background-color 0.3s ease;
+	}
+	input[type="button"]:hover {
+	  background-color: #ddd;
+	}
+	input[type="button"]:active {
+	  /* pressed effect */
+	  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+	}
+	input[type="text"] {
+	  width: 100%;
+	  height: 50px;
+	  font-size: 20px;
+	  margin: 5px;
+	  text-align: right;
+	  padding-right: 5px;
+	  border: none;
+	}
+	#outer {
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  height: 100vh;
+	  margin-top: 50%;
+	}
+	@media screen and (min-width: 768px) {
+	  #calculator {
+	    width: 280px;
+	  }
+	  input[type="button"] {
+	    width: 50px;
+	  }
+	  input[type="text"] {
+	    width: 206px;
+	    font-size: 20px;
+	  }
+	}
+	nav {
+	  height: 50px;
+	}
+	ul {
+	  list-style-type: none;
+	  margin: 0;
+	  padding: 0;
+	  overflow: hidden;
+	}
+	li {
+	  float: left;
+	}
+	a {
+	  display: block;
+	  color: green;
+	  text-align: center;
+	  padding: 14px 16px;
+	  text-decoration: none;
+	}
+	nav a:hover {
+	  background-color: #000;
+	  color: #fff;
+		transform: scale(1.2);
+	}
+	nav a {
+	  transition: transform 0.3s ease;
 	}
 	.toggle-switch {
-  display: inline-block;
-  position: relative;
-  width: 60px;
-  height: 34px;
+	  display: inline-block;
+	  position: relative;
+	  width: 60px;
+	  height: 34px;
+	}
+	.toggle-switch input {
+	  display: none;
+	}
+	.slider {
+	  position: absolute;
+	  cursor: pointer;
+	  top: 0;
+	  left: 0;
+	  right: 0;
+	  bottom: 0;
+	  background-color: #ccc;
+	  -webkit-transition: .4s;
+	  transition: .4s;
+	  border-radius: 34px;
+	}
+	.slider:before {
+	  position: absolute;
+	  content: "";
+	  height: 26px;
+	  width: 26px;
+	  left: 4px;
+	  bottom: 4px;
+	  background-color: white;
+	  -webkit-transition: .4s;
+	  transition: .4s;
+	  border-radius: 50%;
+	}
+	input:checked + .slider {
+	  background-color: #2196F3;
+	}
+	input:focus + .slider {
+	  box-shadow: 0 0 1px #2196F3;
+	}
+	input:checked + .slider:before {
+	  -webkit-transform: translateX(26px);
+	  -ms-transform: translateX(26px);
+	  transform: translateX(26px);
+	}
+	#calculator {
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;
+	  margin: 50px auto 0;
+	  max-width: 768px;
+		margin-top: 10%;
+		background-color: #B0DAFF;
+	}
+	.scientific-calculator button {
+	  display: inline-block;
+	  width: 20%;
+	  height: 40px;
+	  font-size: 18px;
+	  margin: 5px;
+	  background-color: #eee;
+	  border: none;
+	  cursor: pointer;
+	  transition: background-color 0.3s ease;
+	}
+	.scientific-calculator button:hover {
+	  background-color: #ddd;
+	}
+	.scientific-calculator button:active {
+	  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
 	}
 
-.toggle-switch input {
-  display: none;
+	.basic-calculator input[type="button"] {
+  		width: 25%;
+  		height: 50px;
+  		font-size: 20px;
+  		margin: 5px;
+  		background-color: #eee;
+  		border: none;
+  		cursor: pointer;
+  		transition: background-color 0.3s ease;
 	}
 
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-  border-radius: 34px;
-}
+	.basic-calculator input[type="button"]:hover {
+	  background-color: #ddd;
+	}
+	.basic-calculator input[type="button"]:active {
+	  /* pressed effect */
+	  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+	}
+	.scientific-calculator div {
+	  display: flex;
+	  justify-content: center;
+	  margin-bottom: 5px;
+	}
+	.scientific-calculator input[type="button"] {
+	  margin: 5px;
+	  padding: 4px;
+	  width: 50px;
+	}
+	@media screen and (min-width: 768px) {
+	  #calculator {
+	    width: 280px;
+	  }
+	  input[type="button"] {
+	    width: 50px;
+	  }
+	  input[type="text"] {
+	    width: 230px;
+	    font-size: 20px;
+	  }
+	  .basic-calculator input[type="button"] {
+	    height: 50px;
+	    font-size: 20px;
+	  }
+	  .scientific-calculator input[type="button"] {
+	    height: 50px;
+	    font-size: 20px;
+	  }
+	}
+	#outer.dark-mode {
+	  background-color: #333;
+	  color: #eee;
+	}
+	.toggle-switch.dark-mode .slider {
+	  background-color: #444;
+	}
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-  border-radius: 50%;
-}
-
-input:checked + .slider {
+	.toggle-switch.dark-mode input:checked + .slider {
   background-color: #2196F3;
-}
+	}
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
+	.basic-calculator.dark-mode input[type="button"] {
+	  background-color: #444;
+	  color: #eee;
+	}
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-.dark-theme {
-  background-color: #1a1a1a;
-  color: #f1f1f1;
-}
-.dark-theme input[type="button"] {
-  background-color: #444;
-}
-.dark-theme #calculator{
-  background-color: #444;
-
-}
-.dark-theme input[type="text"] {
-  color: white;
-}
-
+	.scientific-calculator.dark-mode input[type="button"] {
+	  background-color: #444;
+	  color: #eee;
+	}
+	.scientific-calculator.dark-mode .buttons div {
+	  background-color: #333;
+	  color: #eee;
+	}
+	.dark-mode {
+	  background-color: #222222;
+	  color: #ffffff;
+	}
+	body.dark-mode #calculator {
+	  background-color: #333;
+	}
+	#button-scientific{
+		float: right;
+		margin-top: 10px;
+		margin-left: 100px;
+	}
+	#buttondark{
+		float: right;
+		margin-top: 10px;
+	}
 </style>
 </head>
 <body>
-  <nav>
-  <ul>
-    <li><a href="https://aryak-mohanty.github.io/Calculator/">Home</a></li>
-    <li><a href="https://aryak-mohanty.github.io/Projects/">List</a></li>
+	<nav>
+	  <ul>
+	    <li><a href="https://aryak-mohanty.github.io/Calculator/">Home</a></li>
+	    <li><a href="https://aryak-mohanty.github.io/Projects/">List</a></li>
+	    <li id="button-scientific">
+	      <label class="toggle-switch">
+	        <input type="checkbox" id="scientific-toggle">
+	        <span class="slider"></span>
+	      </label>
+	    </li>
+
     <li id="buttondark">
 			<label class="toggle-switch">
-  		<input type="checkbox">
+  		<input type="checkbox" id="toggle1">
   		<span class="slider"></span>
    </label>
   </li>
-  </ul>
-</nav>
-<div id="outer">
-<div id="calculator">
-	<div>
-		<input type="text" id="result" value="" disabled>
+	  </ul>
+	</nav>
+	<div class="calculator" id="calculator">
+	  <input type="text" id="result" readonly>
+	  <div id="basic-calculator">
+	    <div>
+	      <input type="button" value="1" onclick="numberClick(1)">
+	      <input type="button" value="2" onclick="numberClick(2)">
+	      <input type="button" value="3" onclick="numberClick(3)">
+	      <input type="button" value="+" onclick="operatorClick('+')">
+	    </div>
+	    <div>
+	      <input type="button" value="4" onclick="numberClick(4)">
+	      <input type="button" value="5" onclick="numberClick(5)">
+	      <input type="button" value="6" onclick="numberClick(6)">
+	      <input type="button" value="-" onclick="operatorClick('-')">
+	    </div>
+	    <div>
+	      <input type="button" value="7" onclick="numberClick(7)">
+	      <input type="button" value="8" onclick="numberClick(8)">
+	      <input type="button" value="9" onclick="numberClick(9)">
+	      <input type="button" value="*" onclick="operatorClick('*')">
+	    </div>
+	    <div>
+	      <input type="button" value="C" onclick="clearClick()">
+	      <input type="button" value="0" onclick="numberClick(0)">
+	      <input type="button" value="=" onclick="equalClick()">
+	      <input type="button" value="/" onclick="operatorClick('/')">
+	    </div>
+	  </div>
+	  <div class="scientific-calculator">
+			<button onclick="sinClick()">sin</button>
+<button onclick="cosClick()">cos</button>
+<button onclick="tanClick()">tan</button>
+<button onclick="sqrtClick()">sqrt</button>
+<button onclick="logClick()">log</button>
+	  </div>
 	</div>
-	<div>
-		<input type="button" value="1" onclick="numberClick(1)">
-		<input type="button" value="2" onclick="numberClick(2)">
-		<input type="button" value="3" onclick="numberClick(3)">
-		<input type="button" value="+" onclick="operatorClick('+')">
-	</div>
-	<div>
-		<input type="button" value="4" onclick="numberClick(4)">
-		<input type="button" value="5" onclick="numberClick(5)">
-		<input type="button" value="6" onclick="numberClick(6)">
-		<input type="button" value="-" onclick="operatorClick('-')">
-	</div>
-	<div>
-		<input type="button" value="7" onclick="numberClick(7)">
-		<input type="button" value="8" onclick="numberClick(8)">
-		<input type="button" value="9" onclick="numberClick(9)">
-		<input type="button" value="*" onclick="operatorClick('*')">
-	</div>
-	<div>
-		<input type="button" value="0" onclick="numberClick(0)">
-		<input type="button" value="C" onclick="clearClick()">
-		<input type="button" value="=" onclick="equalClick()">
-		<input type="button" value="/" onclick="operatorClick('/')">
-	</div>
+<script type="text/javascript">
+const toggleSwitch = document.querySelector('.toggle-switch input[type="checkbox"]');
+const outer = document.getElementById('outer');
+toggleSwitch.addEventListener('change', function() {
+  if(this.checked) {
+    outer.classList.add('dark-mode');
+  } else {
+    outer.classList.remove('dark-mode');
+  }
+});
+const toggle1 = document.querySelector('#toggle1');
 
-</div>
-  </div>
-  <script type="text/javascript">
-	function clearScreen() {
-  document.getElementById("result").value = "";
+toggle1.addEventListener('click', function() {
+  document.body.classList.toggle('dark-mode');
+});
+//scientificcal//
+function sinClick() {
+  var value = document.getElementById("result").value;
+  var result = Math.sin(eval(value));
+  document.getElementById("result").value = result;
 }
 
+function cosClick() {
+  var value = document.getElementById("result").value;
+  var result = Math.cos(eval(value));
+  document.getElementById("result").value = result;
+}
+
+function tanClick() {
+  var value = document.getElementById("result").value;
+  var result = Math.tan(eval(value));
+  document.getElementById("result").value = result;
+}
+function sqrtClick() {
+  var value = document.getElementById("result").value;
+  var result = Math.sqrt(eval(value));
+  document.getElementById("result").value = result;
+}
+function logClick() {
+  var value = document.getElementById("result").value;
+  var result = Math.log10(eval(value));
+  document.getElementById("result").value = result;
+}
+
+const scientificToggle = document.getElementById('scientific-toggle');
+const scientificButtons = document.querySelectorAll('.scientific-calculator button');
+scientificButtons.forEach(button => button.style.display = 'none');
+scientificToggle.addEventListener('change', () => {
+  if (scientificToggle.checked) {
+    scientificButtons.forEach(button => button.style.display = 'inline-block');
+  } else {
+    scientificButtons.forEach(button => button.style.display = 'none');
+  }
+});
+function clearScreen() {
+  document.getElementById("result").value = "";
+}
 function display(value) {
   document.getElementById("result").value += value;
 }
-
 function calculate() {
   var p = document.getElementById("result").value;
   var q = eval(p);
@@ -222,15 +365,12 @@ function calculate() {
 function numberClick(num) {
   display(num);
 }
-
 function operatorClick(operator) {
   display(operator);
 }
-
 function clearClick() {
   clearScreen();
 }
-
 function equalClick() {
   calculate();
 }
@@ -238,7 +378,6 @@ function backspace() {
   var currentValue = document.getElementById("result").value;
   document.getElementById("result").value = currentValue.slice(0, -1);
 }
-
 document.addEventListener("keydown", function(event) {
   if (event.key >= 0 && event.key <= 9) {
     numberClick(event.key);
@@ -248,21 +387,10 @@ document.addEventListener("keydown", function(event) {
     equalClick();
   } else if (event.key === "Escape") {
     clearClick();
-  }
-  else if(event.code === "Backspace") {
+  } else if(event.code === "Backspace") {
     backspace();
   }
 });
-const toggleSwitch = document.querySelector('input[type="checkbox"]');
-toggleSwitch.addEventListener('change', switchTheme);
-
-function switchTheme(e) {
-  if (e.target.checked) {
-    document.body.classList.add('dark-theme');
-  } else {
-    document.body.classList.remove('dark-theme');
-  }
-}
 </script>
 </body>
 </html>
