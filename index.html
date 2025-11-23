@@ -1,396 +1,285 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<title>JavaScript Calculator</title>
-	<style type="text/css">
-	body {
-	  font-family: Arial;
-	  background-color: #FEFF86;
-	}
-	input[type="button"] {
-	  width: 25%;
-	  height: 50px;
-	  font-size: 20px;
-	  margin: 5px;
-	  background-color: #eee;
-	  border: none;
-	  cursor: pointer;
-	  transition: background-color 0.3s ease;
-	}
-	input[type="button"]:hover {
-	  background-color: #ddd;
-	}
-	input[type="button"]:active {
-	  /* pressed effect */
-	  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
-	}
-	input[type="text"] {
-	  width: 100%;
-	  height: 50px;
-	  font-size: 20px;
-	  margin: 5px;
-	  text-align: right;
-	  padding-right: 5px;
-	  border: none;
-	}
-	#outer {
-	  display: flex;
-	  justify-content: center;
-	  align-items: center;
-	  height: 100vh;
-	  margin-top: 50%;
-	}
-	@media screen and (min-width: 768px) {
-	  #calculator {
-	    width: 280px;
-	  }
-	  input[type="button"] {
-	    width: 50px;
-	  }
-	  input[type="text"] {
-	    width: 206px;
-	    font-size: 20px;
-	  }
-	}
-	nav {
-	  height: 50px;
-	}
-	ul {
-	  list-style-type: none;
-	  margin: 0;
-	  padding: 0;
-	  overflow: hidden;
-	}
-	li {
-	  float: left;
-	}
-	a {
-	  display: block;
-	  color: green;
-	  text-align: center;
-	  padding: 14px 16px;
-	  text-decoration: none;
-	}
-	nav a:hover {
-	  background-color: #000;
-	  color: #fff;
-		transform: scale(1.2);
-	}
-	nav a {
-	  transition: transform 0.3s ease;
-	}
-	.toggle-switch {
-	  display: inline-block;
-	  position: relative;
-	  width: 60px;
-	  height: 34px;
-	}
-	.toggle-switch input {
-	  display: none;
-	}
-	.slider {
-	  position: absolute;
-	  cursor: pointer;
-	  top: 0;
-	  left: 0;
-	  right: 0;
-	  bottom: 0;
-	  background-color: #ccc;
-	  -webkit-transition: .4s;
-	  transition: .4s;
-	  border-radius: 34px;
-	}
-	.slider:before {
-	  position: absolute;
-	  content: "";
-	  height: 26px;
-	  width: 26px;
-	  left: 4px;
-	  bottom: 4px;
-	  background-color: white;
-	  -webkit-transition: .4s;
-	  transition: .4s;
-	  border-radius: 50%;
-	}
-	input:checked + .slider {
-	  background-color: #2196F3;
-	}
-	input:focus + .slider {
-	  box-shadow: 0 0 1px #2196F3;
-	}
-	input:checked + .slider:before {
-	  -webkit-transform: translateX(26px);
-	  -ms-transform: translateX(26px);
-	  transform: translateX(26px);
-	}
-	#calculator {
-	  display: flex;
-	  flex-direction: column;
-	  align-items: center;
-	  margin: 50px auto 0;
-	  max-width: 768px;
-		margin-top: 10%;
-		background-color: #B0DAFF;
-	}
-	.scientific-calculator button {
-	  display: inline-block;
-	  width: 20%;
-	  height: 40px;
-	  font-size: 18px;
-	  margin: 5px;
-	  background-color: #eee;
-	  border: none;
-	  cursor: pointer;
-	  transition: background-color 0.3s ease;
-	}
-	.scientific-calculator button:hover {
-	  background-color: #ddd;
-	}
-	.scientific-calculator button:active {
-	  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
-	}
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Responsive Glass Calculator</title>
 
-	.basic-calculator input[type="button"] {
-  		width: 25%;
-  		height: 50px;
-  		font-size: 20px;
-  		margin: 5px;
-  		background-color: #eee;
-  		border: none;
-  		cursor: pointer;
-  		transition: background-color 0.3s ease;
-	}
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-	.basic-calculator input[type="button"]:hover {
-	  background-color: #ddd;
-	}
-	.basic-calculator input[type="button"]:active {
-	  /* pressed effect */
-	  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
-	}
-	.scientific-calculator div {
-	  display: flex;
-	  justify-content: center;
-	  margin-bottom: 5px;
-	}
-	.scientific-calculator input[type="button"] {
-	  margin: 5px;
-	  padding: 4px;
-	  width: 50px;
-	}
-	@media screen and (min-width: 768px) {
-	  #calculator {
-	    width: 280px;
-	  }
-	  input[type="button"] {
-	    width: 50px;
-	  }
-	  input[type="text"] {
-	    width: 230px;
-	    font-size: 20px;
-	  }
-	  .basic-calculator input[type="button"] {
-	    height: 50px;
-	    font-size: 20px;
-	  }
-	  .scientific-calculator input[type="button"] {
-	    height: 50px;
-	    font-size: 20px;
-	  }
-	}
-	#outer.dark-mode {
-	  background-color: #333;
-	  color: #eee;
-	}
-	.toggle-switch.dark-mode .slider {
-	  background-color: #444;
-	}
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-	.toggle-switch.dark-mode input:checked + .slider {
-  background-color: #2196F3;
-	}
+	<style>
+		/* APPLY FONT GLOBALLY */
+		body {
+			font-family: 'Poppins', sans-serif;
+			/* Applied here */
+			background: linear-gradient(135deg, #e3f2fd, #f1f8e9);
+			transition: background 0.4s ease;
+			min-height: 100vh;
+		}
 
-	.basic-calculator.dark-mode input[type="button"] {
-	  background-color: #444;
-	  color: #eee;
-	}
+		/* Ensure form elements and buttons inherit the font explicitly */
+		input,
+		button,
+		.btn {
+			font-family: 'Poppins', sans-serif;
+		}
 
-	.scientific-calculator.dark-mode input[type="button"] {
-	  background-color: #444;
-	  color: #eee;
-	}
-	.scientific-calculator.dark-mode .buttons div {
-	  background-color: #333;
-	  color: #eee;
-	}
-	.dark-mode {
-	  background-color: #222222;
-	  color: #ffffff;
-	}
-	body.dark-mode #calculator {
-	  background-color: #333;
-	}
-	#button-scientific{
-		float: right;
-		margin-top: 10px;
-		margin-left: 100px;
-	}
-	#buttondark{
-		float: right;
-		margin-top: 10px;
-	}
-</style>
+		.calculator-container {
+			width: 100%;
+			border-radius: 35px;
+			padding: 20px;
+			background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+			color: white;
+			backdrop-filter: blur(18px) saturate(180%);
+			-webkit-backdrop-filter: blur(18px) saturate(180%);
+			border: 1px solid rgba(255, 255, 255, 0.4);
+			box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+			transition: background 0.4s ease, box-shadow 0.4s ease;
+		}
+
+		.display-box {
+			height: 70px;
+			font-size: 2rem;
+			text-align: right;
+			padding-right: 15px;
+			border-radius: 15px;
+			background: rgba(255, 255, 255, 0.9);
+			border: none;
+			margin-bottom: 1rem;
+			font-weight: 500;
+			/* Slightly bolder for numbers */
+		}
+
+		.btn-calc {
+			height: 60px;
+			font-size: 1.3rem;
+			font-weight: 400;
+			border-radius: 20px;
+			width: 100%;
+			border: none;
+			transition: transform 0.15s ease, box-shadow 0.2s ease;
+			outline: none !important;
+		}
+
+		/* Hover only on non-touch devices */
+		@media (hover: hover) {
+
+			.btn-calc:hover,
+			.scientific-btn:hover {
+				transform: translateY(-4px);
+				box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+				z-index: 10;
+			}
+		}
+
+		.btn-calc:active,
+		.scientific-btn:active {
+			transform: scale(0.95);
+			box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.3);
+		}
+
+		.btn-calc:focus,
+		.scientific-btn:focus {
+			box-shadow: none;
+		}
+
+		.scientific-btn {
+			height: 50px;
+			font-size: 1.1rem;
+			font-weight: 500;
+			border-radius: 25px;
+			min-width: 60px;
+			border: none;
+			flex-grow: 1;
+			transition: transform 0.15s ease, box-shadow 0.2s ease;
+		}
+
+		#scientificRow {
+			display: none;
+			opacity: 0;
+			transform: scale(0.95) translateY(-6px);
+			transition: all 0.35s ease;
+			max-height: 0;
+			overflow: hidden;
+			padding-top: 15px;
+			padding-bottom: 5px;
+		}
+
+		@media (max-width: 576px) {
+			.calculator-container {
+				padding: 15px;
+				border-radius: 25px;
+			}
+
+			.btn-calc {
+				height: 55px;
+				font-size: 1.2rem;
+			}
+
+			.display-box {
+				font-size: 1.8rem;
+			}
+		}
+	</style>
 </head>
+
 <body>
-	<nav>
-	  <ul>
-	    <li><a href="https://aryak-mohanty.github.io/Calculator/">Home</a></li>
-	    <li><a href="https://aryak-mohanty.github.io/Projects/">List</a></li>
-	    <li id="button-scientific">
-	      <label class="toggle-switch">
-	        <input type="checkbox" id="scientific-toggle">
-	        <span class="slider"></span>
-	      </label>
-	    </li>
 
-    <li id="buttondark">
-			<label class="toggle-switch">
-  		<input type="checkbox" id="toggle1">
-  		<span class="slider"></span>
-   </label>
-  </li>
-	  </ul>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+		<a class="navbar-brand" href="#" style="font-weight: 600;">Calculator</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<div class="ms-auto d-flex flex-column flex-lg-row gap-3 mt-3 mt-lg-0">
+				<div class="form-check form-switch text-white">
+					<input class="form-check-input" type="checkbox" id="modeSwitch">
+					<label class="form-check-label" id="modeLabel" for="modeSwitch">Scientific: Off</label>
+				</div>
+				<div class="form-check form-switch text-white">
+					<input class="form-check-input" type="checkbox" id="darkModeSwitch">
+					<label class="form-check-label" id="themeLabel" for="darkModeSwitch">Light Mode</label>
+				</div>
+			</div>
+		</div>
 	</nav>
-	<div class="calculator" id="calculator">
-	  <input type="text" id="result" readonly>
-	  <div id="basic-calculator">
-	    <div>
-	      <input type="button" value="1" onclick="numberClick(1)">
-	      <input type="button" value="2" onclick="numberClick(2)">
-	      <input type="button" value="3" onclick="numberClick(3)">
-	      <input type="button" value="+" onclick="operatorClick('+')">
-	    </div>
-	    <div>
-	      <input type="button" value="4" onclick="numberClick(4)">
-	      <input type="button" value="5" onclick="numberClick(5)">
-	      <input type="button" value="6" onclick="numberClick(6)">
-	      <input type="button" value="-" onclick="operatorClick('-')">
-	    </div>
-	    <div>
-	      <input type="button" value="7" onclick="numberClick(7)">
-	      <input type="button" value="8" onclick="numberClick(8)">
-	      <input type="button" value="9" onclick="numberClick(9)">
-	      <input type="button" value="*" onclick="operatorClick('*')">
-	    </div>
-	    <div>
-	      <input type="button" value="C" onclick="clearClick()">
-	      <input type="button" value="0" onclick="numberClick(0)">
-	      <input type="button" value="=" onclick="equalClick()">
-	      <input type="button" value="/" onclick="operatorClick('/')">
-	    </div>
-	  </div>
-	  <div class="scientific-calculator">
-			<button onclick="sinClick()">sin</button>
-<button onclick="cosClick()">cos</button>
-<button onclick="tanClick()">tan</button>
-<button onclick="sqrtClick()">sqrt</button>
-<button onclick="logClick()">log</button>
-	  </div>
+
+	<div class="container my-3 my-md-5">
+		<div class="row justify-content-center">
+			<div class="col-12 col-sm-8 col-md-6 col-lg-4">
+
+				<div class="calculator-container shadow" id="calcBox">
+					<input type="text" id="result" class="form-control display-box" readonly>
+
+					<div class="row g-2" id="basicGrid">
+						<div class="col-3"><button class="btn btn-light btn-calc" onclick="numberClick(1)">1</button>
+						</div>
+						<div class="col-3"><button class="btn btn-light btn-calc" onclick="numberClick(2)">2</button>
+						</div>
+						<div class="col-3"><button class="btn btn-light btn-calc" onclick="numberClick(3)">3</button>
+						</div>
+						<div class="col-3"><button class="btn btn-warning btn-calc text-white"
+								onclick="operatorClick('+')">+</button></div>
+
+						<div class="col-3"><button class="btn btn-light btn-calc" onclick="numberClick(4)">4</button>
+						</div>
+						<div class="col-3"><button class="btn btn-light btn-calc" onclick="numberClick(5)">5</button>
+						</div>
+						<div class="col-3"><button class="btn btn-light btn-calc" onclick="numberClick(6)">6</button>
+						</div>
+						<div class="col-3"><button class="btn btn-warning btn-calc text-white"
+								onclick="operatorClick('-')">-</button></div>
+
+						<div class="col-3"><button class="btn btn-light btn-calc" onclick="numberClick(7)">7</button>
+						</div>
+						<div class="col-3"><button class="btn btn-light btn-calc" onclick="numberClick(8)">8</button>
+						</div>
+						<div class="col-3"><button class="btn btn-light btn-calc" onclick="numberClick(9)">9</button>
+						</div>
+						<div class="col-3"><button class="btn btn-warning btn-calc text-white"
+								onclick="operatorClick('*')">*</button></div>
+
+						<div class="col-3"><button class="btn btn-danger btn-calc" onclick="clearClick()">C</button>
+						</div>
+						<div class="col-3"><button class="btn btn-light btn-calc" onclick="numberClick(0)">0</button>
+						</div>
+						<div class="col-3"><button class="btn btn-success btn-calc" onclick="equalClick()">=</button>
+						</div>
+						<div class="col-3"><button class="btn btn-warning btn-calc text-white"
+								onclick="operatorClick('/')">/</button></div>
+					</div>
+
+					<div class="mt-3 d-flex flex-wrap justify-content-center gap-2" id="scientificRow">
+						<button class="btn btn-info text-white scientific-btn" onclick="sinClick()">sin</button>
+						<button class="btn btn-info text-white scientific-btn" onclick="cosClick()">cos</button>
+						<button class="btn btn-info text-white scientific-btn" onclick="tanClick()">tan</button>
+						<button class="btn btn-info text-white scientific-btn" onclick="sqrtClick()">√</button>
+						<button class="btn btn-info text-white scientific-btn" onclick="logClick()">log</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
 	</div>
-<script type="text/javascript">
-const toggleSwitch = document.querySelector('.toggle-switch input[type="checkbox"]');
-const outer = document.getElementById('outer');
-toggleSwitch.addEventListener('change', function() {
-  if(this.checked) {
-    outer.classList.add('dark-mode');
-  } else {
-    outer.classList.remove('dark-mode');
-  }
-});
-const toggle1 = document.querySelector('#toggle1');
 
-toggle1.addEventListener('click', function() {
-  document.body.classList.toggle('dark-mode');
-});
-//scientificcal//
-function sinClick() {
-  var value = document.getElementById("result").value;
-  var result = Math.sin(eval(value));
-  document.getElementById("result").value = result;
-}
+	<script>
+		const result = document.getElementById("result");
 
-function cosClick() {
-  var value = document.getElementById("result").value;
-  var result = Math.cos(eval(value));
-  document.getElementById("result").value = result;
-}
+		function removeFocus() {
+			if (document.activeElement instanceof HTMLElement) {
+				document.activeElement.blur();
+			}
+		}
 
-function tanClick() {
-  var value = document.getElementById("result").value;
-  var result = Math.tan(eval(value));
-  document.getElementById("result").value = result;
-}
-function sqrtClick() {
-  var value = document.getElementById("result").value;
-  var result = Math.sqrt(eval(value));
-  document.getElementById("result").value = result;
-}
-function logClick() {
-  var value = document.getElementById("result").value;
-  var result = Math.log10(eval(value));
-  document.getElementById("result").value = result;
-}
+		function numberClick(num) {
+			result.value += num;
+			removeFocus();
+		}
+		function operatorClick(op) {
+			result.value += op;
+			removeFocus();
+		}
+		function clearClick() {
+			result.value = '';
+			removeFocus();
+		}
+		function equalClick() {
+			try { result.value = eval(result.value) }
+			catch { result.value = "Error" }
+			removeFocus();
+		}
+		function sinClick() { result.value = Math.sin(eval(result.value)); removeFocus(); }
+		function cosClick() { result.value = Math.cos(eval(result.value)); removeFocus(); }
+		function tanClick() { result.value = Math.tan(eval(result.value)); removeFocus(); }
+		function sqrtClick() { result.value = Math.sqrt(eval(result.value)); removeFocus(); }
+		function logClick() { result.value = Math.log10(eval(result.value)); removeFocus(); }
 
-const scientificToggle = document.getElementById('scientific-toggle');
-const scientificButtons = document.querySelectorAll('.scientific-calculator button');
-scientificButtons.forEach(button => button.style.display = 'none');
-scientificToggle.addEventListener('change', () => {
-  if (scientificToggle.checked) {
-    scientificButtons.forEach(button => button.style.display = 'inline-block');
-  } else {
-    scientificButtons.forEach(button => button.style.display = 'none');
-  }
-});
-function clearScreen() {
-  document.getElementById("result").value = "";
-}
-function display(value) {
-  document.getElementById("result").value += value;
-}
-function calculate() {
-  var p = document.getElementById("result").value;
-  var q = eval(p);
-  document.getElementById("result").value = q;
-}
-function numberClick(num) {
-  display(num);
-}
-function operatorClick(operator) {
-  display(operator);
-}
-function clearClick() {
-  clearScreen();
-}
-function equalClick() {
-  calculate();
-}
-function backspace() {
-  var currentValue = document.getElementById("result").value;
-  document.getElementById("result").value = currentValue.slice(0, -1);
-}
-document.addEventListener("keydown", function(event) {
-  if (event.key >= 0 && event.key <= 9) {
-    numberClick(event.key);
-  } else if (event.key === "+" || event.key === "-" || event.key === "*" || event.key === "/") {
-    operatorClick(event.key);
-  } else if (event.key === "Enter") {
-    equalClick();
-  } else if (event.key === "Escape") {
-    clearClick();
-  } else if(event.code === "Backspace") {
-    backspace();
-  }
-});
-</script>
+		// Mode switch
+		const modeSwitch = document.getElementById("modeSwitch");
+		const modeLabel = document.getElementById("modeLabel");
+		const scientificRow = document.getElementById("scientificRow");
+
+		modeSwitch.addEventListener("change", () => {
+			if (modeSwitch.checked) {
+				scientificRow.style.display = "flex";
+				requestAnimationFrame(() => {
+					scientificRow.style.maxHeight = "300px";
+					scientificRow.style.opacity = "1";
+					scientificRow.style.transform = "scale(1) translateY(0)";
+				});
+				modeLabel.textContent = "Scientific: On";
+			} else {
+				scientificRow.style.opacity = "0";
+				scientificRow.style.transform = "scale(0.9) translateY(-8px)";
+				scientificRow.style.maxHeight = "0";
+				setTimeout(() => {
+					scientificRow.style.display = "none";
+				}, 350);
+				modeLabel.textContent = "Scientific: Off";
+			}
+		});
+
+		// Dark / Light theme
+		const darkSwitch = document.getElementById("darkModeSwitch");
+		const themeLabel = document.getElementById("themeLabel");
+
+		darkSwitch.addEventListener("change", () => {
+			if (darkSwitch.checked) {
+				document.body.style.background = "linear-gradient(135deg, #1f1f1f, #424242)";
+				themeLabel.textContent = "Dark Mode";
+			} else {
+				document.body.style.background = "linear-gradient(135deg, #e3f2fd, #f1f8e9)";
+				themeLabel.textContent = "Light Mode";
+			}
+		});
+	</script>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
